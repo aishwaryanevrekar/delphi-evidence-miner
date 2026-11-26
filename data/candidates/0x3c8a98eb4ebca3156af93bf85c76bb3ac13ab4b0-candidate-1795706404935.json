@@ -1,0 +1,36 @@
+{
+  "id": "0x3c8a98eb-8d5739064fb28702",
+  "marketAddress": "0x3c8a98eb4ebca3156af93bf85c76bb3ac13ab4b0",
+  "question": "Will nodejs.org/dist/index.json list Node.js v26.14.0 or later with a release date on or before Dec 11, 2026?",
+  "category": "releases_standards",
+  "odds": {
+    "yes": 0.767552,
+    "no": 0.232448
+  },
+  "evidenceCutoffAt": "2026-12-10T23:59:59.000Z",
+  "resolutionCriteria": "Resolution criteria:\n- \"Yes\": Wins if `https://nodejs.org/dist/index.json` contains an entry whose version field is \"v26.14.0\" or any higher v26.x.x (or any later major) release, and whose date field is on or before \"2026-12-11\", with that entry first appearing in the feed strictly after 2026-11-24T09:13:13.143Z and confirmed present at or before 2026-12-12T07:59:59.000Z.\n- \"No\": Wins if, at 2026-12-12T07:59:59.000Z, `https://nodejs.org/dist/index.json` contains no entry satisfying the conditions above.\n\nClarifications:\n- The window for a qualifying release is strictly after 2026-11-24T09:13:13.143Z (windowStart) and at or before 2026-12-12T07:59:59.000Z (settlementStartsAt). A release whose date field is on or before 2026-12-11 but whose entry does not appear in the feed by 2026-12-12T07:59:59.000Z does not satisfy \"Yes\".\n- Version comparison follows semantic versioning: v26.14.0 is the minimum qualifying version; any v26 patch or minor release ≥ v26.14.0, or any Node.js major version > 26, also qualifies.",
+  "dataSources": [
+    "https://nodejs.org/dist/index.json",
+    "https://nodejs.org/en/download/releases",
+    "https://github.com/nodejs/node/releases"
+  ],
+  "kind": "candidate",
+  "fact": "nodejs.org/dist/index.json at 2026-11-26T15:20:04.934Z lists 21 v26.x.x releases; the highest is v26.13.1 dated 2026-11-10. The market's minimum is v26.14.0 with date on or before 2026-12-11. The median gap between recent v26 releases is 7 days; 16.6 days had elapsed since v26.13.1 (2026-11-10) at read time, putting the next v26 release around 2026-11-17 on that cadence.",
+  "date": "2026-11-26T15:20:04.934Z",
+  "sourceName": "Node.js distribution index (nodejs.org/dist/index.json)",
+  "publishedAt": "2026-11-26T15:20:04.934Z",
+  "link": "https://nodejs.org/dist/index.json",
+  "relevance": "Resolution checks this exact JSON feed for a v26.14.0-or-later version with a date on or before 2026-12-11, present by 2026-12-12T07:59:59Z. The cadence arithmetic is computed from the feed itself, not from commentary.",
+  "working": "Filtered 884 entries to /^v26\\.\\d+\\.\\d+$/ (21 matches), sorted by semantic version, highest=v26.13.1, then compared with v26.14.0. Cadence: median gap 7 days over 9 releases; days since last 16.6; overdue 9.6.",
+  "links": [
+    "https://nodejs.org/dist/index.json"
+  ],
+  "files": [
+    {
+      "name": "node-dist-index.txt",
+      "content": "[\n  {\n    \"version\": \"v26.13.1\",\n    \"date\": \"2026-11-10\",\n    \"parts\": [\n      26,\n      13,\n      1\n    ]\n  },\n  {\n    \"version\": \"v26.13.0\",\n    \"date\": \"2026-10-28\",\n    \"parts\": [\n      26,\n      13,\n      0\n    ]\n  },\n  {\n    \"version\": \"v26.12.1\",\n    \"date\": \"2026-10-21\",\n    \"parts\": [\n      26,\n      12,\n      1\n    ]\n  },\n  {\n    \"version\": \"v26.12.0\",\n    \"date\": \"2026-10-14\",\n    \"parts\": [\n      26,\n      12,\n      0\n    ]\n  },\n  {\n    \"version\": \"v26.11.1\",\n    \"date\": \"2026-10-07\",\n    \"parts\": [\n      26,\n      11,\n      1\n    ]\n  },\n  {\n    \"version\": \"v26.11.0\",\n    \"date\": \"2026-10-07\",\n    \"parts\": [\n      26,\n      11,\n      0\n    ]\n  },\n  {\n    \"version\": \"v26.10.0\",\n    \"date\": \"2026-09-21\",\n    \"parts\": [\n      26,\n      10,\n      0\n    ]\n  },\n  {\n    \"version\": \"v26.9.0\",\n    \"date\": \"2026-09-16\",\n    \"parts\": [\n      26,\n      9,\n      0\n    ]\n  },\n  {\n    \"version\": \"v26.8.2\",\n    \"date\": \"2026-09-09\",\n    \"parts\": [\n      26,\n      8,\n      2\n    ]\n  },\n  {\n    \"version\": \"v26.8.1\",\n    \"date\": \"2026-08-26\",\n    \"parts\": [\n      26,\n      8,\n      1\n    ]\n  },\n  {\n    \"version\": \"v26.8.0\",\n    \"date\": \"2026-08-25\",\n    \"parts\": [\n      26,\n      8,\n      0\n    ]\n  },\n  {\n    \"version\": \"v26.7.0\",\n    \"date\": \"2026-08-05\",\n    \"parts\": [\n      26,\n      7,\n      0\n    ]\n  },\n  {\n    \"version\": \"v26.6.0\",\n    \"date\": \"2026-08-03\",\n    \"parts\": [\n      26,\n      6,\n      0\n    ]\n  },\n  {\n    \"version\": \"v26.5.1\",\n    \"date\": \"2026-07-28\",\n    \"parts\": [\n      26,\n      5,\n      1\n    ]\n  },\n  {\n    \"version\": \"v26.5.0\",\n    \"date\": \"2026-07-08\",\n    \"parts\": [\n      26,\n      5,\n      0\n    ]\n  },\n  {\n    \"version\": \"v26.4.0\",\n    \"date\": \"2026-06-24\",\n    \"parts\": [\n      26,\n      4,\n      0\n    ]\n  },\n  {\n    \"version\": \"v26.3.1\",\n    \"date\": \"2026-06-17\",\n    \"parts\": [\n      26,\n      3,\n      1\n    ]\n  },\n  {\n    \"version\": \"v26.3.0\",\n    \"date\": \"2026-06-01\",\n    \"parts\": [\n      26,\n      3,\n      0\n    ]\n  },\n  {\n    \"version\": \"v26.2.0\",\n    \"date\": \"2026-05-20\",\n    \"parts\": [\n      26,\n      2,\n      0\n    ]\n  },\n  {\n    \"version\": \"v26.1.0\",\n    \"date\": \"2026-05-06\",\n    \"parts\": [\n      26,\n      1,\n      0\n    ]\n  }\n]",
+      "mime": "text/plain"
+    }
+  ],
+  "confidence": "high"
+}

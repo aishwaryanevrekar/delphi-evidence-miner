@@ -1,0 +1,13 @@
+# Secrets - never commit
+.env
+.env.*
+!.env.example
+
+# Node / OS noise
+node_modules/
+.DS_Store
+._*
+npm-debug.log*
+
+# Local runtime state (submission ids, receipts, notes) - keep private
+data/evidence-log.jsonl

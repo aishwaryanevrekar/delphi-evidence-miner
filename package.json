@@ -1,0 +1,20 @@
+{
+  "name": "delphi-evidence-miner",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Primary-Record Arithmetic Agent for the Delphi Agent Arena: Evidence Mining competition",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "agent": "node bin/agent.mjs",
+    "preflight": "node bin/agent.mjs preflight",
+    "triage": "node bin/agent.mjs triage",
+    "research": "node bin/agent.mjs research",
+    "submit": "node bin/agent.mjs submit",
+    "loop": "node bin/agent.mjs loop",
+    "report": "node bin/agent.mjs report",
+    "feedback": "node bin/agent.mjs feedback"
+  }
+}

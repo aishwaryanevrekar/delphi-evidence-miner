@@ -1,0 +1,36 @@
+{
+  "id": "0x7a17b76f-e863593e07c726dc",
+  "marketAddress": "0x7a17b76f7f1cda20e8bc5a88166c4732e6db39f5",
+  "question": "Will English Wikipedia siteinfo API show ≥7,275,500 articles at 12:00 UTC on Dec 10, 2026?",
+  "category": "niche_communities",
+  "odds": {
+    "yes": 0.618848,
+    "no": 0.381152
+  },
+  "evidenceCutoffAt": "2026-12-09T11:00:00.000Z",
+  "resolutionCriteria": "Resolution criteria:\n- \"Yes, ≥7,275,500 articles\": Wins if the `articles` field returned by the English Wikipedia siteinfo API (`https://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=statistics&format=json`) is greater than or equal to 7,275,500 when queried at 2026-12-10T12:00:00Z, provided that query time falls strictly after 2026-11-24T09:56:34Z and at or before 2026-12-10T19:00:00Z.\n- \"No, fewer than 7,275,500\": Wins if the `articles` field returned by the same API is less than 7,275,500 when queried at 2026-12-10T12:00:00Z, provided that query time falls strictly after 2026-11-24T09:56:34Z and at or before 2026-12-10T19:00:00Z.\n\nClarifications:\n- The article count is the value of `query.statistics.articles` in the JSON response from `https://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=statistics&format=json`; this counts only content pages in the main namespace that contain at least one internal wikilink and are not redirects, as defined by MediaWiki's article-count methodology.",
+  "dataSources": [
+    "https://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=statistics&format=json",
+    "https://www.mediawiki.org/wiki/API:Siteinfo",
+    "https://en.wikipedia.org/wiki/Special:Statistics"
+  ],
+  "kind": "candidate",
+  "fact": "English Wikipedia's siteinfo API reports 7,269,550 articles at 2026-11-26T15:20:04.673Z; the market threshold is 7,275,500, so the count is below the threshold (gap 5,950).",
+  "date": "2026-11-26T15:20:04.673Z",
+  "sourceName": "English Wikipedia siteinfo API (query.statistics.articles)",
+  "publishedAt": "2026-11-26T15:20:04.673Z",
+  "link": "https://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=statistics&format=json",
+  "relevance": "The market resolves on the articles field of this exact API when queried at 2026-12-10T12:00:00Z. This is the primary record itself, not a secondary report.",
+  "working": "threshold - current = 7275500 - 7269550 = 5950. Days to the 10 Dec 12:00 UTC check = 13.86. Net additions required to cross = 5,950 / 13.86 = 429 articles per day.",
+  "links": [
+    "https://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=statistics&format=json"
+  ],
+  "files": [
+    {
+      "name": "wikipedia-siteinfo.txt",
+      "content": "{\n  \"batchcomplete\": \"\",\n  \"query\": {\n    \"statistics\": {\n      \"pages\": 66586351,\n      \"articles\": 7269550,\n      \"edits\": 1383322555,\n      \"images\": 980900,\n      \"users\": 55628133,\n      \"activeusers\": 258213,\n      \"admins\": 815,\n      \"jobs\": 0,\n      \"cirrussearch-article-words\": 5325457319,\n      \"queued-massmessages\": 0\n    }\n  }\n}",
+      "mime": "text/plain"
+    }
+  ],
+  "confidence": "high"
+}
