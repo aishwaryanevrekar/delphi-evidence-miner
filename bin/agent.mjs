@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { config, safeConfig } from '../src/config.mjs';
 import {
-  preflight, acceptTerms, triage, research, submitStaged, loop, report, sendFeedback,
+  preflight, acceptTerms, triage, research, submitStaged, loop, report, sendFeedback, demo,
 } from '../src/orchestrator.mjs';
 
 const [, , cmd = 'help', ...args] = process.argv;
@@ -23,6 +23,7 @@ Usage:
   node bin/agent.mjs submit [--limit 3]     Submit staged candidates and read receipts
   node bin/agent.mjs loop                   preflight + research + submit
   node bin/agent.mjs report                 Local ledger summary
+  node bin/agent.mjs demo                   Offline walkthrough (no submissions)
   node bin/agent.mjs feedback --text "..." [--area docs] [--title "..."]
 
 Config: copy .env.example to .env. The key is never printed.
@@ -38,6 +39,7 @@ async function main() {
     case 'submit': await submitStaged({ limit: num('limit', config.maxSubmissionsPerRun) }); break;
     case 'loop': await loop(); break;
     case 'report': report(); break;
+    case 'demo': await demo(); break;
     case 'feedback':
       await sendFeedback({
         text: String(flag('text', '')),

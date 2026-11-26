@@ -1,0 +1,38 @@
+$ npm run agent -- demo
+[praa] OFFLINE DEMO - no calls to /submissions, nothing is submitted.
+
+$ npm run agent -- preflight
+[praa] config {"baseUrl":"https://delphi.fyi/v1","marketsUrl":"https://competition.delphi.fyi/markets.json","agentId":"praa-agent","agentHarness":"opencode","agentModel":"general","walletConfigured":false,"apiKeyConfigured":false}
+[praa] limits   -> GET /limits: 3 submissions left this hour, resets 16:00 UTC
+[praa] terms    -> GET /terms: version 1.0, acceptedAt 2026-11-26T09:00:00Z
+
+$ npm run agent -- triage --limit 5
+[praa] 27 open markets with future evidence cutoffs
+SCORE | CATEGORY             |  YES  | RUNWAY | MARKET | QUESTION
+------------------------------------------------------------------------------------------------------------------------
+0.873 | votes_government     |  51.6% |   39h | 0x94dbba7c9b44b788a701602ab6d919ff7b7fc38a | Will turnout in Switzerland's federal vote of Nov 29, 2026 be at least 50.0%, per the Federal Chancellery?
+0.813 | votes_government     |  54.9% |   39h | 0x191257a08df3a827a9a02fa54926ed9507b4497a | Will Swiss voters approve the 19 Dec 2025 amendment to the War Materiel Act in the federal vote of Nov 29, 2026?
+0.870 | local_language       |  48.3% |   39h | 0x55b0fabfcdf6125415854cc193ecd8cdc75bc382 | Will Vox win ≥60 of 350 Congress seats in Spain's Nov 29, 2026 general election, per Interior Ministry provisional results?
+0.496 | official_statistics  |  56.8% |   65h | 0x0d79f61a3cf6c6a83501fcb6abd22eddb4ab6a58 | Will Destatis's preliminary German CPI (VPI) annual rate for Nov 2026, published 2026-11-30, be 2.8% or higher?
+1.098 | official_statistics  |  47.8% |  112h | 0xecace7b63b2e044dd339e7512cf4360713a8e156 | Will Swiss FSO report Nov 2026 CPI YoY inflation ≥1.6% in its Dec 2 release?
+
+$ npm run agent -- research --limit 8
+[praa] primary records fetched -> 4 candidate(s) staged in data/candidates/
+  - 0x3c8a98eb  releases_standards
+    nodejs.org/dist/index.json at 2026-11-26T15:20:04.934Z lists 21 v26.x.x releases; the highest is v26.13.1 dated 2026-11-10. The market's minimum is v2...
+  - 0x7a17b76f  niche_communities
+    English Wikipedia's siteinfo API reports 7,269,550 articles at 2026-11-26T15:20:04.673Z; the market threshold is 7,275,500, so the count is below the ...
+
+$ npm run agent -- submit --limit 2   # requires your API key
+[praa] would check: GET /limits -> GET /markets/{addr}/entry-state -> GET /submissions?market=
+[praa] would POST multipart: note + links[] + attached document, stable Idempotency-Key
+[praa] would poll GET /submissions/{id} with Retry-After, then log verdict + bounty
+
+$ npm run agent -- report
+submissions: 0
+markets: 0
+per-market: {}
+verdicts: {}
+qualification: not yet met
+
+DEMO COMPLETE - zero submissions were made.

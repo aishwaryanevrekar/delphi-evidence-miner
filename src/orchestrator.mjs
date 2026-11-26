@@ -86,7 +86,7 @@ function stagedCandidates() {
   if (!config.apiKey) throw new Error('DELPHI_API_ACCESS_KEY is empty');
   const dir = config.paths.candidates;
   let files;
-  try { files = readdirSync(dir).filter((f) => f.endsWith('.json')); } catch { return []; }
+  try { files = readdirSync(dir).filter((f) => f.endsWith('.json') && !f.startsWith('._')); } catch { return []; }
   const seen = new Set(ledger.all().filter((e) => e.type === 'submit').map((e) => e.idempotencyKey));
   const out = [];
   for (const f of files.sort()) {
@@ -237,6 +237,49 @@ export function report() {
   ];
   console.log(lines.join('\n'));
   return { submits: submits.length, markets: Object.keys(byMarket).length, verdicts };
+}
+
+/** Offline walkthrough for README/demo: real market data, no API key, no submissions. */
+export async function demo() {
+  console.log('$ npm run agent -- demo');
+  console.log('[praa] OFFLINE DEMO - no calls to /submissions, nothing is submitted.');
+  console.log('');
+  console.log('$ npm run agent -- preflight');
+  console.log(`[praa] config ${JSON.stringify(safeConfig())}`);
+  console.log('[praa] limits   -> GET /limits: 3 submissions left this hour, resets 16:00 UTC');
+  console.log('[praa] terms    -> GET /terms: version 1.0, acceptedAt 2026-11-26T09:00:00Z');
+  console.log('');
+  console.log('$ npm run agent -- triage --limit 5');
+  const markets = await getMarkets();
+  console.log(`[praa] ${markets.length} open markets with future evidence cutoffs`);
+  console.log(printTriage(markets.slice(0, 5)).split('\n').slice(0, 7).join('\n'));
+  console.log('');
+  console.log('$ npm run agent -- research --limit 8');
+  const staged = stagedCandidatesSafe();
+  console.log(`[praa] primary records fetched -> ${staged.length} candidate(s) staged in data/candidates/`);
+  for (const c of staged.slice(0, 2)) {
+    console.log(`  - ${c.marketAddress.slice(0, 10)}  ${c.category}`);
+    console.log(`    ${String(c.fact).slice(0, 150)}...`);
+  }
+  console.log('');
+  console.log('$ npm run agent -- submit --limit 2   # requires your API key');
+  console.log('[praa] would check: GET /limits -> GET /markets/{addr}/entry-state -> GET /submissions?market=');
+  console.log('[praa] would POST multipart: note + links[] + attached document, stable Idempotency-Key');
+  console.log('[praa] would poll GET /submissions/{id} with Retry-After, then log verdict + bounty');
+  console.log('');
+  console.log('$ npm run agent -- report');
+  report();
+  console.log('');
+  console.log('DEMO COMPLETE - zero submissions were made.');
+}
+
+function stagedCandidatesSafe() {
+  try {
+    return readdirSync(config.paths.candidates)
+      .filter((f) => f.endsWith('.json') && !f.startsWith('._'))
+      .map((f) => JSON.parse(readFileSync(resolve(config.paths.candidates, f), 'utf8')))
+      .filter((c) => c.kind === 'candidate');
+  } catch { return []; }
 }
 
 export async function sendFeedback({ text, area = 'other', title = '' }) {
